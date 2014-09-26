@@ -1,0 +1,21 @@
+branch=$(git name-rev --name-only HEAD)
+remote_origin=$(git config --get remote.origin.url | sed 's/.*\:\(.*\)\/\(.*\)/\1/')
+remote_upstream=$(git config --get remote.upstream.url | sed 's/.*\:\(.*\)\/\(.*\)/\1/')
+project=$(git config --get remote.upstream.url | sed 's/.*\:\(.*\)\/\(.*\).git/\2/')
+ 
+if [ -z "$1"]
+then
+  branch_remote=$branch
+else
+  branch_remote=$1
+fi
+ 
+if [ -z "$2"]
+then
+  branch_local=$branch
+else
+  branch_local=$2
+fi
+ 
+url="https://github.com/$remote_upstream/$project/compare/$remote_upstream:$branch_remote...$remote_origin:$branch_local"
+open -a "Google Chrome.app" $url &
