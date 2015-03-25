@@ -1,7 +1,26 @@
-gh-pullrequest
+git-pull-request
 ==============
-To Github:
-chmod +x gpr && sudo cp gpr /usr/bin/gpr
 
-To Bitbucket:
-chmod +x gpr-bit && sudo cp gpr-bit /usr/bin/gpr-bit
+A shellscript to launch Google Chrome with pullrequest page of GitHub or BitBucket
+
+### How to install
+```bash
+git clone git@github.com:brunoziie/git-pull-request.git
+cd git-pull-request
+sudo cp gpr /usr/bin/gpr
+sudo chmod +x /usr/bin/gpr
+```
+
+### Usage
+
+_$ **gpr** \<remote-branch> \<local-branch>_
+
+> Both of arguments are optionals. If not given will use the current branch
+> 
+
+### Notes
+
+To work properly you need to add your upstream repo.
+```bash
+git remote add upstream YOUR_UPSTREAM_REPO_URL
+```

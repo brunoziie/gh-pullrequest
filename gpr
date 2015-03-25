@@ -1,5 +1,7 @@
+#!/bin/bash
+origin=$(git config --get remote.origin.url)
 branch=$(git name-rev --name-only HEAD)
-remote_origin=$(git config --get remote.origin.url | sed 's/.*\:\(.*\)\/\(.*\)/\1/')
+remote_origin=$(echo $origin | sed 's/.*\:\(.*\)\/\(.*\)/\1/')
 remote_upstream=$(git config --get remote.upstream.url | sed 's/.*\:\(.*\)\/\(.*\)/\1/')
 project=$(git config --get remote.upstream.url | sed 's/.*\:\(.*\)\/\(.*\).git/\2/')
  
@@ -16,6 +18,14 @@ then
 else
   branch_local=$2
 fi
- 
-url="https://github.com/$remote_upstream/$project/compare/$remote_upstream:$branch_remote...$remote_origin:$branch_local"
+
+echo "$remote_origin" 
+
+if [[ "$origin" =~ "bitbucket" ]]
+then 
+  url="https://bitbucket.org/$remote_origin/$project/pull-request/new?source=$remote_origin/$project::$branch_local&dest=$remote_upstream/$project::$branch_remote&event_source=branch_detail"
+else 
+  url="https://github.com/$remote_upstream/$project/compare/$remote_upstream:$branch_remote...$remote_origin:$branch_local"
+fi
+
 open -a "Google Chrome.app" $url &
