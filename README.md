@@ -13,7 +13,7 @@ sudo chmod +x /usr/bin/gpr
 
 ### Usage
 
-_$ **gpr** \<remote-branch> \<local-branch>_
+_$ **gpr** \<target-branch> \<source-branch>_
 
 > Both of arguments are optionals. If not given will use the current branch
 > 
